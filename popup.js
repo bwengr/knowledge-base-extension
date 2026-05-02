@@ -66,17 +66,23 @@ async function handleSubmit(e) {
   loading.classList.remove("hidden");
   scrollToBottom();
 
-  try {
-    const response = await sendToAI(question);
+try {
+      const response = await sendToAI(question);
 
-    if (response.error) {
-      addMessage("error", response.error);
-    } else {
-      addMessage("assistant", response.answer, response.chunks);
+      if (response.error) {
+        addMessage("error", response.error);
+      } else {
+        let chunks = [];
+        if (response.chunks && response.chunks.length > 0) {
+          chunks = response.chunks;
+        } else if (response.sources && response.sources.length > 0) {
+          chunks = response.sources.map(url => ({ url, title: url }));
+        }
+        addMessage("assistant", response.answer, chunks);
+      }
+    } catch (error) {
+      addMessage("error", "Something went wrong. Please try again.");
     }
-  } catch (error) {
-    addMessage("error", "Something went wrong. Please try again.");
-  }
 
   // Re-enable input
   sendBtn.disabled = false;
