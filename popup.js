@@ -108,7 +108,22 @@ async function sendToAI(question) {
     throw new Error(`HTTP error: ${response.status}`);
   }
 
-  return await response.json();
+  const text = await response.text();
+
+  const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
+  if (jsonMatch) {
+    try {
+      return JSON.parse(jsonMatch[1]);
+    } catch (e) {
+      return JSON.parse(text);
+    }
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    return { answer: text, error: "Failed to parse response" };
+  }
 }
 
 function addMessage(role, content, chunks = []) {
