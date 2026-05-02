@@ -125,6 +125,7 @@ function addMessage(role, content, chunks = []) {
         link.className = "link-pill";
         link.href = chunk.url;
         link.textContent = chunk.title || chunk.url;
+        link.title = chunk.url;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
         linksDiv.appendChild(link);
