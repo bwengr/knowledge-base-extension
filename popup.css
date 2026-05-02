@@ -5,14 +5,14 @@
 }
 
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #1e293b;
-  --text-secondary: #4b5563;
+  --bg-primary: #1e293b;
+  --bg-secondary: #131e30;
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.6);
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
-  --border: #e5e7eb;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   --radius: 12px;
   --bw-charcoal: #1e293b;
   --bw-slate: #131e30;
@@ -39,12 +39,14 @@ header {
   padding: 20px;
   text-align: center;
   border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
 }
 
 header h1 {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 4px;
+  color: white;
 }
 
 .subtitle {
@@ -85,10 +87,12 @@ header h1 {
   color: var(--text-primary);
   align-self: flex-start;
   border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
 }
 
 .message.assistant p {
   margin: 0 0 8px 0;
+  color: var(--text-primary);
 }
 
 .message.assistant p:last-child {
@@ -97,7 +101,7 @@ header h1 {
 
 .message.assistant strong {
   font-weight: 600;
-  color: var(--text-primary);
+  color: white;
 }
 
 .message.assistant ul {
@@ -148,9 +152,10 @@ header h1 {
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  background: #eff6ff;
-  border-bottom: 1px solid #dbeafe;
+  background: rgba(37, 99, 235, 0.2);
+  border-bottom: 1px solid var(--border);
   font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 #context-indicator.hidden {
@@ -158,7 +163,7 @@ header h1 {
 }
 
 .context-text {
-  color: #1e40af;
+  color: rgba(255, 255, 255, 0.8);
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -168,7 +173,7 @@ header h1 {
 #clear-context {
   background: none;
   border: none;
-  color: #1e40af;
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   font-size: 16px;
   padding: 0 4px;
@@ -176,12 +181,13 @@ header h1 {
 }
 
 #clear-context:hover {
-  color: #1d4ed8;
+  color: white;
 }
 
 #chat-form {
   padding: 12px 16px;
   border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
 }
 
 .input-wrapper {
@@ -197,6 +203,8 @@ header h1 {
   border-radius: var(--radius);
   font-size: 13px;
   font-family: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
   resize: none;
   max-height: 100px;
   outline: none;
@@ -205,6 +213,10 @@ header h1 {
 
 #user-input:focus {
   border-color: var(--accent);
+}
+
+#user-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 #send-btn {
@@ -262,6 +274,7 @@ footer {
   font-size: 11px;
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
 }
 
 footer p {
