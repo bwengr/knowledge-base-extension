@@ -119,32 +119,29 @@ header h1 {
   border: 1px solid #fecaca;
 }
 
-.sources {
-  margin-top: 8px;
-  padding-top: 8px;
+.links {
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.sources-title {
+.link-pill {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.source-link {
-  display: block;
-  font-size: 11px;
-  color: var(--accent);
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  padding: 4px 0;
-  word-break: break-all;
+  transition: all 0.2s;
 }
 
-.source-link:hover {
-  text-decoration: underline;
+.link-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 #context-indicator {

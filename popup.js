@@ -72,7 +72,7 @@ async function handleSubmit(e) {
     if (response.error) {
       addMessage("error", response.error);
     } else {
-      addMessage("assistant", response.answer, response.sources);
+      addMessage("assistant", response.answer, response.chunks);
     }
   } catch (error) {
     addMessage("error", "Something went wrong. Please try again.");
@@ -105,33 +105,32 @@ async function sendToAI(question) {
   return await response.json();
 }
 
-function addMessage(role, content, sources = []) {
+function addMessage(role, content, chunks = []) {
   const messageDiv = document.createElement("div");
   messageDiv.className = `message ${role}`;
 
   if (role === "assistant") {
     messageDiv.innerHTML = formatContent(content);
 
-    if (sources && sources.length > 0) {
-      const sourcesDiv = document.createElement("div");
-      sourcesDiv.className = "sources";
+    if (chunks && chunks.length > 0) {
+      const linksDiv = document.createElement("div");
+      linksDiv.className = "links";
 
-      const sourcesTitle = document.createElement("div");
-      sourcesTitle.className = "sources-title";
-      sourcesTitle.textContent = "Sources";
-      sourcesDiv.appendChild(sourcesTitle);
+      const seen = new Set();
+      chunks.forEach((chunk) => {
+        if (seen.has(chunk.url)) return;
+        seen.add(chunk.url);
 
-      sources.forEach((source) => {
         const link = document.createElement("a");
-        link.className = "source-link";
-        link.href = source;
-        link.textContent = source;
+        link.className = "link-pill";
+        link.href = chunk.url;
+        link.textContent = chunk.title || chunk.url;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
-        sourcesDiv.appendChild(link);
+        linksDiv.appendChild(link);
       });
 
-      messageDiv.appendChild(sourcesDiv);
+      messageDiv.appendChild(linksDiv);
     }
   } else {
     messageDiv.textContent = content;
