@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Base Chat</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Knowledge Base Chat</h1>
+      <p class="subtitle">Grounded in real content</p>
+    </header>
+
+    <div id="chat-container">
+      <div id="chat-messages"></div>
+    </div>
+
+    <div id="context-indicator" class="hidden">
+      <span class="context-text"></span>
+      <button id="clear-context" aria-label="Clear context">×</button>
+    </div>
+
+    <form id="chat-form">
+      <div class="input-wrapper">
+        <textarea
+          id="user-input"
+          placeholder="Ask a question..."
+          rows="1"
+          aria-label="Your question"
+        ></textarea>
+        <button type="submit" id="send-btn" aria-label="Send">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <span>Thinking...</span>
+    </div>
+
+    <footer>
+      <p>Powered by <span id="powered-by">your knowledge base</span></p>
+    </footer>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
