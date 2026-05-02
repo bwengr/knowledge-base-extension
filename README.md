@@ -71,6 +71,14 @@ Your backend should:
 
 The extension itself is provider-agnostic. Your backend handles the AI integration. Swap in Claude, GPT-4, or any other model.
 
+### Branding
+
+To customize the branding:
+
+1. **Footer text**: Edit `popup.html` and change the text in `<span id="powered-by">`
+2. **Header**: Edit the `<h1>` and `.subtitle` in `popup.html`
+3. **Colors**: Edit CSS variables in `popup.css` under `:root`
+
 ### Styling
 
 Edit `popup.css` to match your brand. The default styling is neutral and clean.

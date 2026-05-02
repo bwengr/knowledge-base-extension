@@ -110,9 +110,7 @@ function addMessage(role, content, sources = []) {
   messageDiv.className = `message ${role}`;
 
   if (role === "assistant") {
-    const contentP = document.createElement("p");
-    contentP.textContent = content;
-    messageDiv.appendChild(contentP);
+    messageDiv.innerHTML = formatContent(content);
 
     if (sources && sources.length > 0) {
       const sourcesDiv = document.createElement("div");
@@ -141,6 +139,43 @@ function addMessage(role, content, sources = []) {
 
   chatMessages.appendChild(messageDiv);
   scrollToBottom();
+}
+
+function formatContent(text) {
+  let html = escapeHtml(text);
+
+  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+  const paragraphs = html.split(/\n\n+/);
+  if (paragraphs.length > 1) {
+    return paragraphs.map(p => {
+      p = p.replace(/\n/g, "<br>");
+      if (p.startsWith("- ") || p.match(/^- /m)) {
+        const lines = p.split("<br>");
+        const items = lines.filter(l => l.trim().startsWith("-"));
+        const first = lines.find(l => !l.trim().startsWith("-") && l.trim());
+        let listHtml = "<ul>" + items.map(l => "<li>" + l.replace(/^- /, "") + "</li>").join("") + "</ul>";
+        return first ? first + listHtml : listHtml;
+      }
+      return "<p>" + p + "</p>";
+    }).join("");
+  }
+
+  if (html.includes("<br>") || html.startsWith("- ")) {
+    const lines = html.split("<br>");
+    if (lines.some(l => l.trim().startsWith("-"))) {
+      const items = lines.filter(l => l.trim().startsWith("-")).map(l => "<li>" + l.replace(/^-\s*/, "") + "</li>").join("");
+      return items ? "<ul>" + items + "</ul>" : html;
+    }
+  }
+
+  return "<p>" + html.replace(/\n/g, "<br>") + "</p>";
+}
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 function scrollToBottom() {
