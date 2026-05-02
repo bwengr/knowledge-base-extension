@@ -6,14 +6,18 @@
 
 :root {
   --bg-primary: #ffffff;
-  --bg-secondary: #f7f8fa;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
+  --bg-secondary: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #4b5563;
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
   --border: #e5e7eb;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   --radius: 12px;
+  --bw-charcoal: #1e293b;
+  --bw-slate: #131e30;
+  --bw-light: #f8fafc;
+  --bw-gray: #4b5563;
 }
 
 body {
